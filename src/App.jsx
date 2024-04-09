@@ -1,8 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import PageLayout from "./ui/PageLayout.jsx";
-import Home from "./pages/Home.jsx";
-import Pokemon from "./pages/Pokemon.jsx";
 import Startpage from "./pages/Startpage.jsx";
+import Lobby from "./pages/Lobby.jsx";
+import Pokemon from "./pages/Pokemon.jsx";
+import Stareoff from "./pages/Stareoff.jsx";
+import Fightarena from "./pages/Fightarena.jsx";
+import Userscore from "./pages/Userscore.jsx";
+import Leaderboard from "./pages/Leaderboard.jsx";
 import { useFetch } from "./hooks/useFetch.js";
 
 function App() {
@@ -15,11 +19,15 @@ function App() {
       <Routes>
 
         <Route path="/" element={<PageLayout />}>
-          <Route path="/hello" element={<Startpage />} />
           <Route index element={<Startpage />} />
           {user && (
             <>
+              <Route path="/lobby" element={<Lobby />} />
               <Route path="/pokemon" element={<Pokemon />} />
+              <Route path="/stareoff" element={<Stareoff />} />
+              <Route path="/fightarena" element={<Fightarena />} />
+              <Route path="/userscore" element={<Userscore />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
             </>
           )}
           <Route path="*" element={<h1>Not found!</h1>} />
