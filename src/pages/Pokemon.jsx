@@ -12,10 +12,6 @@ function Pokemon() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (!pokemonData) {
-    return <div>Loading...</div>;
-  }
-
   const { name, types = [], abilities = [], stats = [] } = pokemonData;
 
   return (
