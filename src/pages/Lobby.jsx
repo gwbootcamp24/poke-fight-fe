@@ -52,13 +52,13 @@ function Lobby() {
     <>
     <div className="filterButtons">
       <button onClick={handleFilter} value="all">All</button>
-      {pokeTypesState.map((type)=>{
+      {pokeTypesState.map((type, index)=>{
         return (
-        <button onClick={handleFilter} value={type.name}>{type.name[0].toUpperCase() + type.name.slice(1)}</button>
+        <button key={`type-${index}`} onClick={handleFilter} value={type.name}>{type.name[0].toUpperCase() + type.name.slice(1)}</button>
       )})}
     </div>
     <div className="pokemongrid">
-      {pokemons?.map((pokemon,index) => (
+      {pokemons?.map((pokemon, index) => (
             <PokemonPreview key={`pokemon-${index}`}  pokemon={pokemon} />
         ))}
     </div>
