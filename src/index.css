@@ -73,6 +73,10 @@ button:focus-visible {
   }
 }
 
+.startpage {
+  background-image: url("./background/start.png");
+}
+
 .pokemongrid{
   display: flex;
   max-width: 90vw;

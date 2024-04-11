@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch.js";
+import Button from "../ui/Button.jsx";
 
 function Stareoff() {
   const { id: selectedPokemonId } = useParams();
@@ -52,14 +53,14 @@ function Stareoff() {
 
   return (
     <div className="stareoff">
-      <Link to="/leaderboard">Leaderboard</Link>
+      <Button text="Leaderboard" url="/leaderboard" />
       <div className="selected-pokemon">
         <h2>Your Pokemon:</h2>
         <img
           alt={selectedPokemon.name}
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${selectedPokemon.id}.png`}
         />
-        <p>Name: {selectedPokemon.name}</p>
+        <p>{selectedPokemon.name}</p>
       </div>
       <div className="random-pokemon">
         <h2>Your Opponent:</h2>
@@ -67,11 +68,11 @@ function Stareoff() {
           alt={randomPokemon.name}
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randomPokemon.id}.png`}
         />
-        <p>Name: {randomPokemon.name}</p>
+        <p>{randomPokemon.name}</p>
       </div>
       {/* Link zurück zur Pokemon-Komponente */}
-      <Link to={`/pokemon/${selectedPokemonId}`}>Go back</Link>
-      <Link to={`/fightarena/${selectedPokemonId}`}>Fight!</Link>
+      <Button text="Go back" url={`/pokemon/${selectedPokemonId}`} />
+      <Button text="Fight!" url={`/fightarena/${selectedPokemonId}`} />
     </div>
   );
 }

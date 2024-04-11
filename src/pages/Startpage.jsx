@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch.js";
 import Button from "../ui/Button.jsx";
 
 function Startpage() {
   return (
     <>
-      <div>
+      <div className="startpage">
         Das hier ist die Startpage mit dem Logo in der Mitte
       </div>
       <div>
