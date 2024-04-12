@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
 const Button = (props) => {
-  const {url, text} = props
+  const {url, img} = props
   return (
     <Link to={url}>
-      <button>{text}</button>
+      <button style={{ backgroundColor: "transparent", border: "none", cursor: "pointer" }}>
+        <img src={img} border="0" />
+      </button>
     </Link>
   )
 }

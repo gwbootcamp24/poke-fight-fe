@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
 import Button from "../ui/Button.jsx";
+import Logo from '../font/pokefight_bg.png';
+import Background from '../background/start.png';
+import StartButton from '../font/start.png';
 
 function Startpage() {
 
   const { setBackgroundImage } = useBackgroundImage();
 
   useEffect(() => {
-    setBackgroundImage('https://ballonkunst-herzog.de/wp-content/uploads/2022/01/Ballons.png');
+    setBackgroundImage(Background);
   }, []);
 
 return (
   <div>
+    <img src={Logo} alt="PokeFight" />
     <div>
-      Das hier ist die Startpage mit dem Logo in der Mitte
-    </div>
-    <div>
-      <Button text="Start game" url="/lobby" />
+      <Button img={StartButton} url="/lobby" />
     </div>
   </div>
 );
