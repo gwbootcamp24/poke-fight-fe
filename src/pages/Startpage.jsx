@@ -14,10 +14,10 @@ function Startpage() {
   }, []);
 
 return (
-  <div>
+  <div className="startpage">
     <img src={Logo} alt="PokeFight" />
-    <div>
-      <Button img={StartButton} url="/lobby" />
+    <div className="startpage-btn">
+      <Button img={StartButton} url="/lobby"/>
     </div>
   </div>
 );

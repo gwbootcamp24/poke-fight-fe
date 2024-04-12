@@ -1,6 +1,10 @@
 import { useFetch } from "../hooks/useFetch.js";
 import PokemonPreview from "../ui/PokemonPreview.jsx";
 import { useState, useEffect } from "react";
+import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
+import BackgroundImg from '../background/choose.png';
+
+
 function Lobby() {
 
   const [pokemons, setPokemons] = useState([]);
@@ -47,6 +51,13 @@ function Lobby() {
       setPokeTypesState(pokeTypes.results);
     }
   }, [pokeTypes]);
+
+  const { setBackgroundImage } = useBackgroundImage();
+
+  useEffect(() => {
+    console.log("Hintergrundbild:", BackgroundImg);
+    setBackgroundImage(BackgroundImg);
+  }, []);
 
   return (
     <>
