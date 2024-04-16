@@ -1,6 +1,10 @@
 import { useFetch } from "../hooks/useFetch.js";
 import PokemonPreview from "../ui/PokemonPreview.jsx";
 import { useState, useEffect } from "react";
+import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
+import BackgroundImg from '../background/choose.png';
+
+
 function Lobby() {
 
   const [pokemons, setPokemons] = useState([]);
@@ -48,17 +52,24 @@ function Lobby() {
     }
   }, [pokeTypes]);
 
+  const { setBackgroundImage } = useBackgroundImage();
+
+  useEffect(() => {
+    console.log("Hintergrundbild:", BackgroundImg);
+    setBackgroundImage(BackgroundImg);
+  }, []);
+
   return (
     <>
     <div className="filterButtons">
       <button onClick={handleFilter} value="all">All</button>
-      {pokeTypesState.map((type)=>{
+      {pokeTypesState.map((type, index)=>{
         return (
-        <button onClick={handleFilter} value={type.name}>{type.name[0].toUpperCase() + type.name.slice(1)}</button>
+        <button key={`type-${index}`} onClick={handleFilter} value={type.name}>{type.name[0].toUpperCase() + type.name.slice(1)}</button>
       )})}
     </div>
     <div className="pokemongrid">
-      {pokemons?.map((pokemon,index) => (
+      {pokemons?.map((pokemon, index) => (
             <PokemonPreview key={`pokemon-${index}`}  pokemon={pokemon} />
         ))}
     </div>

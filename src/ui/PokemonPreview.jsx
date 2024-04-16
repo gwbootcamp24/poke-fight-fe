@@ -7,7 +7,7 @@ function PokemonPreview(pokemon) {
 
 
     
-    <div  className="m-2 mx-auto w-2/3 border-2 border-dashed border-gray-700 bg-gray-100 p-2 text-center">
+    <div  className="m-2 mx-auto w-2/3 p-2 text-center">
       <div>
       <Link to={`/pokemon/${id}`}>
         <div className={`card ${types[0]}`} data-id={id} data-name={name}>
