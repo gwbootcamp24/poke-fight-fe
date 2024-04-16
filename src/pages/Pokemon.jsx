@@ -19,7 +19,7 @@ function Pokemon() {
   }, []);
 
   const { id } = useParams();
-  const apiUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const apiUrl = `${import.meta.env.VITE_SERVER_URL}/pokemon/${id.toString()}`;
   
   const [error, pokemonData] = useFetch(apiUrl);
 
@@ -36,12 +36,12 @@ function Pokemon() {
       <Button className="leaderboard-btn" img={Leaderboard} url="/leaderboard" />
       <img
         alt={name}
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+        src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${id}.png`}
       />
       <h2>{name}</h2>
-      <p>Type: {types.length > 0 && types.map(type => type.type.name).join(" | ")}</p>
-      <p>Abilities: {abilities.length > 0 && abilities.map(ability => ability.ability.name).join(", ")}</p>
-      <p>Stats: {stats.length > 0 && stats.map(stat => `${stat.base_stat} ${stat.stat.name}`).join(", ")}</p>
+      <p>Type: {types.map((type)=>(type + ', '))}</p>
+      <p>Abilities: {abilities.map((ability)=>(ability + ', '))}</p>
+      <p>Stats: ${stats}</p>
       <Button img={Back} url="/lobby" />
       <Button img={Fight} url={`/stareoff/${id}`} />
     </div>
