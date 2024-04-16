@@ -89,7 +89,13 @@ button:focus-visible {
   display: flex;
   max-width: 90vw;
   flex-flow: row wrap;
+
+  margin: 0 auto;
+
+  
+
   margin: auto;  
+
 }
 
 .pokemongrid > div{
@@ -102,17 +108,32 @@ button:focus-visible {
 }
 
 
+.filterButtons {
+  display: flex;
+  justify-content: center;
+  ;
+}
 
-/* ---------------------  POKEMON DETAIL --------------------- */
+.filterButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0.5em;
+  margin: 20px;
+}
 
+.filterButton img {
+  width: 50px;
+  height: 50px;
 
+}
 
+.filterButton span {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
 
+}
 
-/* -----------------------  STAREDOWN -------------------------- */
-
-
-
-
-
-/* -----------------------  FIGHT ARENA ------------------------ */
