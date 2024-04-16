@@ -14,4 +14,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </BackgroundImageProvider>
     </BrowserRouter>
   // </React.StrictMode>,
+
+  
 );
