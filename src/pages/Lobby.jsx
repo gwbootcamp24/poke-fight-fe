@@ -1,6 +1,8 @@
 import { useFetch } from "../hooks/useFetch.js";
 import PokemonPreview from "../ui/PokemonPreview.jsx";
 import { useState, useEffect } from "react";
+import ButtonIcons from "../ui/ButtonIcons.jsx";
+
 function Lobby() {
 
   const [pokemons, setPokemons] = useState([]);
@@ -50,14 +52,21 @@ function Lobby() {
 
   return (
     <>
-    <div className="filterButtons">
-      <button onClick={handleFilter} value="all">All</button>
-      {pokeTypesState.map((type)=>{
-        return (
-        <button onClick={handleFilter} value={type.name}>{type.name[0].toUpperCase() + type.name.slice(1)}</button>
-      )})}
-    </div>
-    <div className="pokemongrid">
+      <div className="filterButtons">
+        <button onClick={handleFilter} value="all" style={{ background: "transparent", border: "none", padding: "0", margin: "0" }}>
+          All
+        </button>
+        {pokeTypesState.map((type) => {
+          const icons = ButtonIcons;
+          return (
+            <button key={type.name} onClick={handleFilter} value={type.name} style={{ background: "transparent", border: "none", padding: "0", margin: "0" }}>
+              <img src={icons[type.name]} alt={type.name} style={{ display: "block", width: "50px", height: "50px" }} />
+              <span style={{ display: "block", textAlign: "center", marginTop: "5px" }}>{type.name[0].toUpperCase() + type.name.slice(1)}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="pokemongrid">
       {pokemons?.map((pokemon,index) => (
             <PokemonPreview key={`pokemon-${index}`}  pokemon={pokemon} />
         ))}
