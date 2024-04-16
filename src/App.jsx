@@ -23,9 +23,9 @@ function App() {
           {user && (
             <>
               <Route path="/lobby" element={<Lobby />} />
-              <Route path="/pokemon" element={<Pokemon />} />
-              <Route path="/stareoff" element={<Stareoff />} />
-              <Route path="/fightarena" element={<Fightarena />} />
+              <Route path="/pokemon/:id" element={<Pokemon />} />
+              <Route path="/stareoff/:id" element={<Stareoff />} />
+              <Route path="/fightarena/:id" element={<Fightarena />} />
               <Route path="/userscore" element={<Userscore />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
             </>

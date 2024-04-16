@@ -1,18 +1,26 @@
-import { Link } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch.js";
+import { useEffect } from "react";
+import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
 import Button from "../ui/Button.jsx";
+import Logo from '../font/pokefight_bg.png';
+import Background from '../background/start.png';
+import StartButton from '../font/start.png';
 
 function Startpage() {
-  return (
-    <>
-      <div>
-        Das hier ist die Startpage mit dem Logo in der Mitte
-      </div>
-      <div>
-        <Button text="Start game" url="/lobby" />
-      </div>
-    </>
-  );
+
+  const { setBackgroundImage } = useBackgroundImage();
+
+  useEffect(() => {
+    setBackgroundImage(Background);
+  }, []);
+
+return (
+  <div className="startpage">
+    <img src={Logo} alt="PokeFight" />
+    <div className="startpage-btn">
+      <Button img={StartButton} url="/lobby"/>
+    </div>
+  </div>
+);
 }
- 
+
 export default Startpage;

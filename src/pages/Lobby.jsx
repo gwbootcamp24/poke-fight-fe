@@ -1,7 +1,12 @@
 import { useFetch } from "../hooks/useFetch.js";
 import PokemonPreview from "../ui/PokemonPreview.jsx";
 import { useState, useEffect } from "react";
+
 import ButtonIcons from "../ui/ButtonIcons.jsx";
+
+import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
+import BackgroundImg from '../background/choose.png';
+
 
 function Lobby() {
 
@@ -50,8 +55,17 @@ function Lobby() {
     }
   }, [pokeTypes]);
 
+  const { setBackgroundImage } = useBackgroundImage();
+
+  useEffect(() => {
+    console.log("Hintergrundbild:", BackgroundImg);
+    setBackgroundImage(BackgroundImg);
+  }, []);
+
   return (
     <>
+
+    
       <div className="filterButtons">
         <button onClick={handleFilter} value="all" style={{ background: "transparent", border: "none", padding: "0", margin: "0" }}>
           All
@@ -66,8 +80,12 @@ function Lobby() {
           );
         })}
       </div>
-      <div className="pokemongrid">
-      {pokemons?.map((pokemon,index) => (
+
+   
+    
+    <div className="pokemongrid">
+      {pokemons?.map((pokemon, index) => (
+
             <PokemonPreview key={`pokemon-${index}`}  pokemon={pokemon} />
         ))}
     </div>
