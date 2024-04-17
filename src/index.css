@@ -140,8 +140,52 @@ img.pokemonId {
 }
 
 .emptyDiv {
-  display: none; /* Verstecke das leere Div-Element */
+  display: none;
 }
+/* 
+.pokemon-detail-container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "stats pokemon empty"
+    "back pokemon start"
+    ". . .";
+}
+
+.stats { 
+  font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
+  grid-area: stats;
+  color: white;
+  background-color: rgb(37, 76, 111, .7);
+  margin-left: 5em;  
+}
+
+.pokemonId { 
+  grid-area: pokemon; 
+}
+
+.emptyDiv { 
+  grid-area: empty; 
+}
+
+.btn-back { 
+  grid-area: back; 
+}
+
+.btn-back { 
+  grid-area: back; 
+}
+
+.btn-back > img { 
+  align-items: end;
+}
+
+.btn-start { 
+  grid-area: start;
+ } */
+
 
 /* -----------------------  STAREDOWN -------------------------- */
 
