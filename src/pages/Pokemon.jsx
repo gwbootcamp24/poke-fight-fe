@@ -20,7 +20,7 @@ function Pokemon() {
 
   const { id } = useParams();
   const apiUrl = `${import.meta.env.VITE_SERVER_URL}/pokemon/${id.toString()}`;
-
+  
   const [error, pokemonData] = useFetch(apiUrl);
 
   if (error) {

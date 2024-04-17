@@ -1,17 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch.js";
-import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
 import Button from "../ui/Button.jsx";
-import Leaderboard from '../font/leaderboard.png';
 
 function Stareoff() {
-  const { setBackgroundImage } = useBackgroundImage();
-
-  useEffect(() => {
-    setBackgroundImage('https://solarwissen.selfmade-energy.com/wp-content/uploads/2022/07/AdobeStock_216275201.jpeg');
-  }, []);
-
   const { id: selectedPokemonId } = useParams();
   const selectedPokemonUrl = `${import.meta.env.VITE_SERVER_URL}/pokemon/${selectedPokemonId}`;
   console.log(selectedPokemonUrl);
@@ -53,7 +45,7 @@ function Stareoff() {
 
   return (
     <div className="stareoff">
-      <Button img={Leaderboard} url="/leaderboard" />
+      <Button text="Leaderboard" url="/leaderboard" />
       <div className="selected-pokemon">
         <h2>Your Pokemon:</h2>
         <img
