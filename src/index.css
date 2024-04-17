@@ -2,18 +2,36 @@
 
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Kalam, Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 600;
 
+  color: white;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.kalam-light {
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.kalam-regular {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kalam-bold {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
@@ -50,7 +68,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -61,7 +79,7 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
 
 /* -----------------------  STARTPAGE -------------------- */
 
@@ -137,3 +155,88 @@ button:focus-visible {
 
 }
 
+
+/* ---------------------  POKEMON DETAIL --------------------- */
+
+.detail-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; 
+}
+
+.detail-menu img {
+  max-width: 10vw; 
+  height: auto;
+}
+
+img.yourPokemon {
+  max-width: 25vw; 
+  height: auto;
+}
+
+img.pokemonId {
+  margin: auto;
+  max-width: 100%;
+}
+
+.pokemon-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.stats {
+  background-color: rgb(37, 76, 111, .7);
+  margin-left: 5em;  
+}
+
+.emptyDiv {
+  display: none;
+}
+
+/* -----------------------  STAREDOWN -------------------------- */
+
+.stareoff-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.stareoff-1 img {
+  max-width: 10vw; 
+  height: auto;
+  margin: 0 8em 0 8em;
+}
+
+.stareoff-2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; 
+  flex-wrap: nowrap;
+}
+
+.stareoff-2 img {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.stareoff-3 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stareoff-3 img {
+  max-width: 11vw; 
+  height: auto;
+}
+
+.stareoff-3 p {
+  font-size: 4em;
+  margin: 0;
+}
+
+
+
+/* -----------------------  FIGHT ARENA ------------------------ */
