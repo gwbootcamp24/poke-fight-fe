@@ -80,11 +80,9 @@ function Pokemon() {
   }, []);
 
   const { id } = useParams();
-  // const apiUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const apiUrl = `${import.meta.env.VITE_SERVER_URL}/pokemon/${id.toString()}`;
-  console.log(apiUrl)
+
   const [error, pokemonData] = useFetch(apiUrl);
-  console.log("pokemonData",pokemonData)
 
   if (error) {
     return <div>Error: {error.message}</div>;
