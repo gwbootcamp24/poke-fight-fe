@@ -195,7 +195,7 @@ img.pokemonId {
   display: none;
 }
 
-/* -----------------------  STAREDOWN -------------------------- */
+/* -----------------------  STAREDOWN --------------------------
 
 .stareoff-1 {
   display: flex;
@@ -236,7 +236,75 @@ img.pokemonId {
   font-size: 4em;
   margin: 0;
 }
+ */
+ .stareoff-container {  display: grid;
+  grid-template-columns: 1.2fr 0.6fr 1.2fr; 
+  grid-template-rows: 0.4fr 2.2fr 0.4fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+    "title empty-div leaderboard-btn"
+    "selected-pokemon-img start-btn opponent-img"
+    "selected-pokemon-name back-btn opponent-name";
+}
 
+.title { 
+  grid-area: title; 
+  justify-self: start;
+  margin: 0 5em 0 5em;
+}
 
+.empty-div { grid-area: empty-div; }
 
+.leaderboard-btn { 
+  grid-area: leaderboard-btn;
+  justify-self: end;
+  margin: 0 5em 0 5em;
+}
+.title img, .leaderboard-btn img, .back-btn img { 
+  max-width: 10vw; 
+  height: auto;
+}
+
+.selected-pokemon-img { 
+  grid-area: selected-pokemon-img; 
+  max-width: 100%;
+  justify-self: end;
+}
+
+.start-btn {
+  grid-area: start-btn;
+  align-self: start; 
+}
+
+.start-btn img {
+  max-width: 100%;
+  height: auto;
+}
+
+.opponent-img { 
+  grid-area: opponent-img; 
+  max-width: 100%;
+  justify-self: start;
+}
+
+.selected-pokemon-name {
+  grid-area: selected-pokemon-name;
+}
+
+.back-btn { grid-area: back-btn; }
+
+.opponent-name {
+  grid-area: opponent-name;
+}
+
+.selected-pokemon-name, .opponent-name {
+  margin: 0;
+  padding: 0 10px;
+  background-color: rgba(48, 48, 60, 0.7);
+  border-radius: 9px;
+  font-size: 4em;
+}
 /* -----------------------  FIGHT ARENA ------------------------ */

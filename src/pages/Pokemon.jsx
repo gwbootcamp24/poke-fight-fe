@@ -32,7 +32,7 @@ function Pokemon() {
   return (
     <div className="m-2 mx-auto w-2/3 border-2 p-2 text-center">
       <div className="detail-menu">
-        <img className="title" src={Title}/>
+        <Button className="title" img={Title} url="/"/>
         <img className="yourPokemon" src={yourPokemon}/>
         <Button className="leaderboard-btn" img={Leaderboard} url="/leaderboard"/>
       </div>
