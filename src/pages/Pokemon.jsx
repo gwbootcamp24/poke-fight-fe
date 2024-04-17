@@ -47,9 +47,8 @@ function Pokemon() {
           alt={name}
           src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${id}.png`}
         />
-        <div className="emptyDiv"></div>
       </div>
-      <div>
+      <div className="detail-menu">
        <Button className="btn-back" img={Back} url="/lobby" />
        <Button className="btn-start" img={Fight} url={`/stareoff/${id}`} />
       </div>

@@ -2,18 +2,36 @@
 
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Kalam, Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 600;
 
+  color: white;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.kalam-light {
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.kalam-regular {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kalam-bold {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
@@ -50,7 +68,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -61,7 +79,7 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
 
 /* -----------------------  STARTPAGE -------------------- */
 
@@ -158,6 +176,7 @@ img.yourPokemon {
 
 img.pokemonId {
   margin: auto;
+  max-width: 100%;
 }
 
 .pokemon-detail-grid {
@@ -168,8 +187,6 @@ img.pokemonId {
 }
 
 .stats {
-  font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
-  color: white;
   background-color: rgb(37, 76, 111, .7);
   margin-left: 5em;  
 }
@@ -177,54 +194,48 @@ img.pokemonId {
 .emptyDiv {
   display: none;
 }
-/* 
-.pokemon-detail-container {  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "stats pokemon empty"
-    "back pokemon start"
-    ". . .";
-}
-
-.stats { 
-  font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
-  grid-area: stats;
-  color: white;
-  background-color: rgb(37, 76, 111, .7);
-  margin-left: 5em;  
-}
-
-.pokemonId { 
-  grid-area: pokemon; 
-}
-
-.emptyDiv { 
-  grid-area: empty; 
-}
-
-.btn-back { 
-  grid-area: back; 
-}
-
-.btn-back { 
-  grid-area: back; 
-}
-
-.btn-back > img { 
-  align-items: end;
-}
-
-.btn-start { 
-  grid-area: start;
- } */
-
 
 /* -----------------------  STAREDOWN -------------------------- */
 
+.stareoff-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
 
+.stareoff-1 img {
+  max-width: 10vw; 
+  height: auto;
+  margin: 0 8em 0 8em;
+}
+
+.stareoff-2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; 
+  flex-wrap: nowrap;
+}
+
+.stareoff-2 img {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.stareoff-3 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stareoff-3 img {
+  max-width: 11vw; 
+  height: auto;
+}
+
+.stareoff-3 p {
+  font-size: 4em;
+  margin: 0;
+}
 
 
 

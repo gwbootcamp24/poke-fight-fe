@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch.js";
 import Button from "../ui/Button.jsx";
+import Title from '../font/pokefight_sm.png';
+import Leaderboard from '../font/leaderboard.png';
+import Back from '../font/back.png';
+import Fight from '../font/start.png';
 
 function Stareoff() {
   const { id: selectedPokemonId } = useParams();
@@ -44,27 +48,29 @@ function Stareoff() {
   }
 
   return (
-    <div className="stareoff">
-      <Button text="Leaderboard" url="/leaderboard" />
-      <div className="selected-pokemon">
-        <h2>Your Pokemon:</h2>
-        <img
-          alt={selectedPokemon.name}
-          src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${selectedPokemon.id}.png`}
-        />
-        <p>{selectedPokemon.name}</p>
+    <div>
+      <div className="stareoff-1">
+        <img className="title" src={Title}/>
+        <Button className="leaderboard-btn" img={Leaderboard} url="/leaderboard"/>
       </div>
-      <div className="random-pokemon">
-        <h2>Your Opponent:</h2>
-        <img
+      <div className="stareoff-2">
+        <div className="selected-pokemon">
+          <img
+            alt={selectedPokemon.name}
+            src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${selectedPokemon.id}.png`}
+          />
+          <Button img={Fight} url={`/fightarena/${selectedPokemonId}`} />
+          <img
           alt={randomPokemon.name}
           src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${randomPokemon.id}.png`}
-        />
+          />
+        </div>
+      </div>
+      <div className="stareoff-3">
+        <p>{selectedPokemon.name}</p>
+        <Button img={Back} url={`/pokemon/${selectedPokemonId}`} />
         <p>{randomPokemon.name}</p>
       </div>
-      {/* Link zurück zur Pokemon-Komponente */}
-      <Button text="Go back" url={`/pokemon/${selectedPokemonId}`} />
-      <Button text="Fight!" url={`/fightarena/${selectedPokemonId}`} />
     </div>
   );
 }
