@@ -20,7 +20,7 @@ function Lobby() {
   // console.log("posts",pokeApiResult);
 
   const handleFilter = (e) => {
-    const value = e.target.value;
+    const value = e.currentTarget.value;
     if (value === "all"){
       console.log("pokeApiResult",pokeApiResult)
       setPokemons(pokeApiResult);
