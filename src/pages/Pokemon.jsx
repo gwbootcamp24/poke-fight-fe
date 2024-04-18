@@ -37,16 +37,20 @@ function Pokemon() {
         <Button className="leaderboard-btn" img={Leaderboard} url="/leaderboard"/>
       </div>
       <div className="pokemon-detail-grid">
-        <div className="stats">
-          <h2>Name: {name}</h2>
-          <p>Type: {types.map((type)=>(type + ', '))}</p>
-          <p>Abilities:{abilities.map((ability)=>(ability + ', '))}</p>
-          <p>Stats: ${stats}</p>
+        <div className="stats-left">
+          <h2>{name}</h2>
+          <p>Type:  {types.map((type)=>(type + ', '))}</p>
+          <p>Abilities:  {abilities.map((ability)=>(ability + ', '))}</p>
         </div>
         <img className="pokemonId"
           alt={name}
           src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${id}.png`}
         />
+        <div className="stats-right">
+        <div className="stats-right">
+          <p>Stats: {stats}</p>
+        </div>
+        </div>
       </div>
       <div className="detail-menu">
        <Button className="btn-back" img={Back} url="/lobby" />
