@@ -42,6 +42,7 @@ body {
 }
 
 a {
+  
   font-weight: 500;
   color: #ffffff;
   text-decoration: inherit;
@@ -60,7 +61,15 @@ button {
   border: none;
   cursor: pointer;
   appearance: none;
-  /* background-color: inherit; */
+  font-family: kalam;
+  font-size: 1em;
+  font-weight: 700;
+  color: white;
+}
+
+button:hover 
+{
+  color: #ffe260;
 }
 
 /* button:focus,
@@ -105,53 +114,82 @@ button:focus-visible {
 
 .pokemongrid{
   display: flex;
-  max-width: 90vw;
+  max-width: 85vw;
   flex-flow: row wrap;
-
   margin: 0 auto;
-
+  margin: auto;
   
-
-  margin: auto;  
-
 }
 
 .pokemongrid > div{
   flex: 1 1 25%;
-  max-width: 25%
+  max-width: 10%
 }
 
-.pokemongrid > div img{
-  width: 100%;
+.pokemongrid img{
+  width: 90%;
 }
 
+
+
+.lobby-container {
+  padding: 0.2em;
+}
+
+
+.lobbyheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0em 2em 0em 2em ;
+}
+
+.lobbyheader img {
+  height: 12vw;
+}
+
+.lobbyfooter  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.6em;
+  margin-left: 6em;
+
+
+}
 
 .filterButtons {
   display: flex;
   justify-content: center;
-  ;
+  margin: 2.4em;
+  width: 40vw;
+
 }
 
-.filterButton {
+.previous {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  
+}
+
+.previous button, .next button {
+  font-family: kalam;
+  color: white;
+  font-weight: 700;
+  font-size: 2.8em;
   background: transparent;
   border: none;
-  padding: 0.5em;
-  margin: 20px;
+  margin-top: -3em;
 }
 
-.filterButton img {
-  width: 50px;
-  height: 50px;
+.next {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background: transparent;
 
-}
-
-.filterButton span {
-  display: block;
-  text-align: center;
-  margin-top: 5px;
 
 }
 
