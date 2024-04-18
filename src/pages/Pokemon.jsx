@@ -32,21 +32,25 @@ function Pokemon() {
   return (
     <div className="m-2 mx-auto w-2/3 border-2 p-2 text-center">
       <div className="detail-menu">
-        <img className="title" src={Title}/>
-        <img className="yourPokemon" src={yourPokemon}/>
+        <Button className="title" img={Title} url="/"/>
+          <img className="yourPokemon" src={yourPokemon}/>
         <Button className="leaderboard-btn" img={Leaderboard} url="/leaderboard"/>
       </div>
       <div className="pokemon-detail-grid">
-        <div className="stats">
-          <h2>Name: {name}</h2>
-          <p>Type: {types.map((type)=>(type + ', '))}</p>
-          <p>Abilities:{abilities.map((ability)=>(ability + ', '))}</p>
-          <p>Stats: ${stats}</p>
+        <div className="stats-left">
+          <h2>{name}</h2>
+          <p>Type:  {types.map((type)=>(type + ', '))}</p>
+          <p>Abilities:  {abilities.map((ability)=>(ability + ', '))}</p>
         </div>
         <img className="pokemonId"
           alt={name}
           src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${id}.png`}
         />
+        <div className="stats-right">
+        <div className="stats-right">
+          <p>Stats: {stats}</p>
+        </div>
+        </div>
       </div>
       <div className="detail-menu">
        <Button className="btn-back" img={Back} url="/lobby" />

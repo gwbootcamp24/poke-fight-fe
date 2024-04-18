@@ -1,7 +1,7 @@
 import { useFetch } from "../hooks/useFetch.js";
 import PokemonPreview from "../ui/PokemonPreview.jsx";
 import { useState, useEffect } from "react";
-
+import Button from "../ui/Button.jsx";
 import ButtonIcons from "../ui/ButtonIcons.jsx";
 
 import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
@@ -59,49 +59,28 @@ function Lobby() {
     }
   }
 
-  const handleClick = (pokemonId) => {
-
-    history.push(`/pokemon/${pokemonId}`);
-  }
-
-  const goToLeaderboard = () => {
-
-    history.push("/leaderboard");
-  }
-
-  const goToStartPage = () => {
-
-    history.push("/");
-  }
-
 
   return (
     <>
 
     <div className="lobby-container"> 
-    <div className="lobbyheader">
-        <img src={HomeButton} alt="Home" className="home-button" onClick={goToStartPage}/>
-        <img src={Headline} alt="headline" className="headline"/>
-        <img src={LeaderboardButton} alt="Leaderboard" className="leaderboard-button" onClick={goToLeaderboard} />
+
+      <div className="lobbyheader">
+          {/* <img src={HomeButton} alt="Home" className="home-button" onClick={goToStartPage}/> */}
+          <Button className="home-button" img={HomeButton} url="/"/>
+          <img src={Headline} alt="headline" className="headline"/>
+          {/* <img src={LeaderboardButton} alt="Leaderboard" className="leaderboard-button" onClick={goToLeaderboard} /> */}
+          <Button className="leaderboard-button" img={LeaderboardButton} url="/leaderboard"/>
       </div>
     
-
       <div className="pokemongrid">
       {filteredPokemons?.map((pokemon, index) => (
 
             <PokemonPreview key={`pokemon-${index}`}  pokemon={pokemon} />
         ))}
-    
-
-       
-
-    
-
       <div className="lobbyfooter"> 
-
         <div className="previous">
         <button onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}>Previous</button>
-
        </div>
 
         <div className="filterButtons">
