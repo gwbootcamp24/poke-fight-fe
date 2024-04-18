@@ -16,29 +16,67 @@ function App() {
   const navigate = useNavigate();
   const user = true;
   const [game, setGame] = useState({});
+  const [testpokemon1Data, setTestpokemon1Data] = useState({});
+  const [testpokemon2Data, setTestpokemon2Data] = useState({});
   const testpokemon1 = 3;
   const testpokemon2 = 5;
   const apiUrl1 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${testpokemon1}`;
   const apiUrl2 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${testpokemon2}`;
-  let testpokemon1Data, testpokemon2Data
   let location = useLocation();
   let errortestpokemon1Data, errortestpokemon2Data
-  console.log(location );
+  // console.log(location );
+
+
+
+
+useEffect(()=>{
+
+  if (testpokemon1Data&&testpokemon2Data&&Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
+    console.log("was here navigate",game)
+
+    navigate("./fightarena/");
+  }
+},[game]);
+
+
+useEffect(()=>{
+
   if (location.pathname.match(/fightTest/)){
     const loader = async () => {
-      [errortestpokemon1Data, testpokemon1Data] = useFetch(apiUrl1);
-      [errortestpokemon2Data, testpokemon2Data] = useFetch(apiUrl2);
+      const p1Data = await fetchDataWithoutHook(apiUrl1);
+      const p2Data = await fetchDataWithoutHook(apiUrl2);
+
+      setTestpokemon1Data(p1Data)
+      setTestpokemon2Data(p2Data)
+
+      async function fetchDataWithoutHook(url) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("Request failed");
+          const data = await res.json();
+  
+           console.log("data",data)
+                
+          return(data);
+
+        } catch (error) {
+          console.log("error",url);
+        }
+      }
+  
+
       if (Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
-        console.log("was here")
-        navigate("./fightarena/");
+        console.log("was here location")
       }
       return null;
     };
     loader();
   }
+
+},[]);
   
     const getPlayerstats = (pokemonData) => {
-      console.log("pokemonData",pokemonData);
+      console.log("pokemonData" );
       let playerStats = pokemonData.stats.split(/ /);
       let player = {...pokemonData, 
         hp:playerStats[0],
@@ -47,7 +85,6 @@ function App() {
         specialAttack:playerStats[6],
         specialDefense:playerStats[8]
       };
-      console.log("player",player);
       return player;
     }
 
