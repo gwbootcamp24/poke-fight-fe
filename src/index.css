@@ -148,6 +148,13 @@ button:focus-visible {
   height: 12vw;
 }
 
+h2.card-title {
+  text-shadow:  1px  1px 2px black,
+  1px -1px 1px black,
+  -1px  1px 1px black,
+  -1px -1px 1px black;
+}
+
 .lobbyfooter  {
   display: flex;
   justify-content: space-between;
@@ -163,7 +170,13 @@ button:focus-visible {
   justify-content: center;
   margin: 2.4em;
   width: 40vw;
+}
 
+.filterButtons span {
+  text-shadow:  1px  1px 2px black,
+  1px -1px 1px black,
+  -1px  1px 1px black,
+  -1px -1px 1px black;
 }
 
 .previous {
@@ -182,6 +195,10 @@ button:focus-visible {
   background: transparent;
   border: none;
   margin-top: -3em;
+  text-shadow:  3px  3px 3px black,
+                3px -3px 3px black,
+                -3px  3px 3px black,
+                -3px -3px 3px black;
 }
 
 .next {
