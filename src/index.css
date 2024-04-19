@@ -387,7 +387,12 @@ img.pokemonId {
 
 
 .leaderboard-startPage-btn img { 
+  position: absolute;
   max-width: 15vw; 
   height: auto;
+  top: 40vw;
+  right: 5vw;
+  /* margin-left: 80vw; */
+  /* margin-top: 7vw; */
 }
 
