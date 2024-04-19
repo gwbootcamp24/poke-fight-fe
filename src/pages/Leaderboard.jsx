@@ -51,7 +51,7 @@ function Leaderboard() {
       </div>
 
       
-    <div className="startpage-btn">
+    <div className="leaderboard-startPage-btn img">
       <Button img={StartButton} url="/lobby"/>
     </div>
     </>

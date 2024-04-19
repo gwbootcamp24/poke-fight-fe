@@ -350,3 +350,44 @@ img.pokemonId {
                 -3px -3px 3px black;
 }
 /* -----------------------  FIGHT ARENA ------------------------ */
+
+
+
+/* -----------------------  Leaderboard ------------------------ */
+
+.leaderboard-highscore {
+  position: absolute;
+  top: 10%;
+  left: 55%; 
+  transform: translate(-33%, -33%);
+  max-width: 33vw;
+  height: auto;
+
+}
+
+.leaderboard-highscore-table {  
+  display: inline-table;
+  position: relative;
+  left: 50%;
+  bottom: 5%;
+
+  margin-left: 0.5em;
+  font-size: 2.5em;  
+  text-shadow:  2px  2px 2px black,
+                2px -2px 2px black,
+                -2px  2px 2px black,
+                -2px -2px 2px black;
+}
+
+.leaderboard-highscore-table-row {
+  margin-top: -1.5em;
+}
+
+
+
+
+.leaderboard-startPage-btn img { 
+  max-width: 15vw; 
+  height: auto;
+}
+
