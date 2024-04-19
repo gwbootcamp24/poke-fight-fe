@@ -3,7 +3,6 @@ import PokemonPreview from "../ui/PokemonPreview.jsx";
 import { useState, useEffect } from "react";
 import Button from "../ui/Button.jsx";
 import ButtonIcons from "../ui/ButtonIcons.jsx";
-
 import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
 import BackgroundImg from '../background/choose.png';
 import HomeButton from '../font/pokefight_sm.png';
@@ -17,7 +16,6 @@ function Lobby() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonPerPage] = useState(20);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
-
   const [error, pokeApiResult] = useFetch(import.meta.env.VITE_SERVER_URL + "/pokemon");
   const [error2, pokeTypes] = useFetch('https://pokeapi.co/api/v2/type');
 
@@ -50,13 +48,12 @@ function Lobby() {
   const handleFilter = (e) => {
     const value = e.currentTarget.value;
     if (value === "all") {
-      setFilteredPokemons(pokeApiResult);
+      setFilteredPokemons(pokemons.slice(0, pokemonPerPage));
     } else {
-      const filteredPokemons = pokeApiResult.filter((pokemon) => {
-        return pokemon.types.includes(value);
-      });
-      setFilteredPokemons(filteredPokemons);
+      const filteredPokemons = pokemons.filter((pokemon) => pokemon.types.includes(value));
+      setFilteredPokemons(filteredPokemons.slice(0, pokemonPerPage)); 
     }
+    setCurrentPage(1);
   }
 
 
