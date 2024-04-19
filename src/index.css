@@ -146,6 +146,7 @@ button:focus-visible {
 
 .lobbyheader img {
   height: 12vw;
+  margin-bottom: 2em;
 }
 
 h2.card-title {
@@ -159,7 +160,7 @@ h2.card-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.6em;
+  margin-top: 2.5em;
   margin-left: 6em;
 
 
@@ -168,7 +169,7 @@ h2.card-title {
 .filterButtons {
   display: flex;
   justify-content: center;
-  margin: 2.4em;
+  margin: 3.4em;
   width: 40vw;
 }
 
@@ -264,6 +265,11 @@ img.pokemonId {
                 -2px -2px 2px black;
 }
 
+.card-title {
+  font-size: 1.2em;
+
+
+}
 
 /* -----------------------  STAREDOWN --------------------------*/
 

@@ -14,7 +14,7 @@ function PokemonPreview(pokemon) {
               src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${id}.png`} 
               
             />
-            <h2 className="card-title" style={{textAlign: 'left'}}>{name[0].toUpperCase() + name.slice(1)}</h2>
+            <h2 className="card-title" style={{textAlign: 'center'}}>{name[0].toUpperCase() + name.slice(1)}</h2>
           </div>
         </Link>
       </div>
