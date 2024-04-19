@@ -52,9 +52,7 @@ const Fightarena = (props) => {
       const interval = setInterval(() => {
 
         turnResult = doNextTurn();
-
         console.log("turnResult",turnResult);
-
         setCurrendTurn(currendTurn+1)
 
         if (turnResult.gameOver === true){
@@ -62,6 +60,7 @@ const Fightarena = (props) => {
         }
 
       }, 5000); 
+
       console.log('hello loop')
       return () => clearInterval(interval);
       
