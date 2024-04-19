@@ -32,6 +32,7 @@ function App() {
 useEffect(()=>{
 
   if (testpokemon1Data&&testpokemon2Data&&Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
+    
     console.log("was here navigate",game)
 
     navigate("./fightarena/");
@@ -66,7 +67,7 @@ useEffect(()=>{
   
 
       if (Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
-        console.log("was here location")
+        console.log("testpokemon1Data fetched")
       }
       return null;
     };

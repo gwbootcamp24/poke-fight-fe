@@ -1,69 +1,105 @@
 import { useState, useEffect } from "react";
 const Fightarena = (props) => {
-  console.log("props", props);
   const {playerPokemon, enemyPokemon} = props
-  const [fightIsRunning, setFightIsRunning] = useState(false)
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  // const [fightIsRunning, setFightIsRunning] = useState(false)
+  const [currendTurn, setCurrendTurn] = useState(1)
+  let turnResult
 
 
   const [gameState, setGameState] = useState(
-    {
-      players: {
-        player: {
-          hp:playerPokemon.hp,
-          attack:playerPokemon.attack,
-          defense:playerPokemon.defense,
-          specialAttack:playerPokemon.specialAttack,
-          specialDefense:playerPokemon.specialDefense,
-   
-        },
-        enemy: {
-          hp:enemyPokemon.hp,
-          attack:enemyPokemon.attack,
-          defense:enemyPokemon.defense,
-          specialAttack:enemyPokemon.specialAttack,
-          specialDefense:enemyPokemon.specialDefense,
-
-        }
-      },
-      
-
-    }
-  ); // Loading state
+    {}
+  ); 
 
   useEffect(() => {
-    // const winner = fightLoop()
-    setFightIsRunning(true)
+
+    setGameState(
+      {
+        players: {
+          player: {
+            hp:playerPokemon.hp,
+            attack:playerPokemon.attack,
+            defense:playerPokemon.defense,
+            specialAttack:playerPokemon.specialAttack,
+            specialDefense:playerPokemon.specialDefense,
+    
+          },
+          enemy: {
+            hp:enemyPokemon.hp,
+            attack:enemyPokemon.attack,
+            defense:enemyPokemon.defense,
+            specialAttack:enemyPokemon.specialAttack,
+            specialDefense:enemyPokemon.specialDefense,
+
+          } 
+
+        },
+        player1Turn: true
+        
+
+      }
+    );
+    console.log("setGameState")
+
+    // setFightIsRunning(true)
+
   }, [])
 
-
-  useEffect(() => {
-    if(fightIsRunning === true) {
-      const interval = setInterval(() => {
-        //code inside here will run every second
-        const turnResult = doNextTurn();
-        if (turnResult.gameOver){
-          setFightIsRunning(false)
-        }
   
-      }, 2000); //change the 1000 to however many miliseconds you want between execution
+  
+  useEffect(() => {
+
+    // if(fightIsRunning === true) {
+      const interval = setInterval(() => {
+
+        turnResult = doNextTurn();
+
+        console.log("turnResult",turnResult);
+
+        setCurrendTurn(currendTurn+1)
+
+        if (turnResult.gameOver === true){
+          clearInterval(interval);
+        }
+
+      }, 5000); 
+      console.log('hello loop')
       return () => clearInterval(interval);
       
+    // }
+  }, [gameState]);
+
+
+  useEffect(() => {
+    if (turnResult){
+    console.log("turnResult",turnResult)
+      
+      setGameState(turnResult);
+      
     }
-  }, [fightIsRunning]);
+
+  }, [currendTurn])
+
+
+
+
 
   function doNextTurn() {
+    
+    const { player } = {...gameState.players };
+    const { enemy } = {...gameState.players };
+    const player1Turn = gameState.player1Turn;
 
-    // const {hpPlayer1, attPlayer1, defPlayer1, hpPlayer2, attPlayer2, defPlayer2, player1Turn} = gameState;
-    const { player } = {...gameState.players.player };
-    const { enemy } = {...gameState.players.enemy };
+    console.log("player", player);
+    console.log("enemy", enemy);
 
     let damageBrutto, damageNetto;
     let playerTurnIndex, enemyTurnIndex; 
 
     playerTurnIndex = (gameState.player1Turn === true ? 0 : 1);
     enemyTurnIndex = (gameState.player1Turn === true ? 1 : 0);
-    
+    console.log("playerTurnIndex", playerTurnIndex);
+    console.log("enemyTurnIndex", enemyTurnIndex);
+
     const player_hitter = (gameState.player1Turn === true ? player : enemy)
     const player_ishit = (gameState.player1Turn === true ? enemy : player)
 
@@ -94,37 +130,37 @@ const Fightarena = (props) => {
           hp[playerTurnIndex] = hp[playerTurnIndex] - damageBrutto;
         }
       }
-      setGameState(
-        {
-          players: {
-            player: {
-              hp:hp[playerTurnIndex],
-              attack:attack[playerTurnIndex],
-              defense:defense[enemyTurnIndex],
-              specialAttack:specialAttack[playerTurnIndex],
-              specialDefense:specialDefense[enemyTurnIndex],
-        
-            },
-            enemy: {
-              hp:hp[enemyTurnIndex],
-              attack:attack[enemyTurnIndex],
-              defense:defense[enemyTurnIndex],
-              specialAttack:specialAttack[enemyTurnIndex],
-              specialDefense:specialDefense[enemyTurnIndex],
-    
-            }
+      const newGameState = {
+        players: {
+          player: {
+            hp:hp[playerTurnIndex],
+            attack:attack[playerTurnIndex],
+            defense:defense[enemyTurnIndex],
+            specialAttack:specialAttack[playerTurnIndex],
+            specialDefense:specialDefense[enemyTurnIndex],
+      
           },
-          
-          player1Turn: !player1Turn
+          enemy: {
+            hp:hp[enemyTurnIndex],
+            attack:attack[enemyTurnIndex],
+            defense:defense[enemyTurnIndex],
+            specialAttack:specialAttack[enemyTurnIndex],
+            specialDefense:specialDefense[enemyTurnIndex],
+  
+          }
+        },
+        
+        player1Turn: !player1Turn
 
-        }
-      );
+      }
 
-      console.log(gameState);
 
-      return(gameOver)
+ 
+      return(newGameState)
     
     }
+
+    return(gameOver)
 
 
   }
