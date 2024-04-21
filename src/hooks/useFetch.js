@@ -15,7 +15,7 @@ export function useFetch(url) {
         // const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=2000");
         // const data = await response.json();
               
-         console.log("data",data)
+         // console.log("data",data)
               
         setData(data);
       } catch (error) {

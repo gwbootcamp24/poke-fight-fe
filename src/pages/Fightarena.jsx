@@ -48,48 +48,208 @@ const useCallback = (callback) => {
 const Fightarena = (props) => {
   const {playerPokemon, enemyPokemon} = props
   // const [fightIsRunning, setFightIsRunning] = useState(false)
-  const [currendTurn, setCurrendTurn] = useState(1)
+  // const [currendTurn, setCurrendTurn] = useState(1)
   const [counter, setCounter] = useState(0);
-  let turnResult
+  // let turnResult
 
 
   const [gameState, setGameState] = useState(
-    {}
+    {
+      players: {
+        player: {
+          hp:playerPokemon.hp,
+          attack:playerPokemon.attack,
+          defense:playerPokemon.defense,
+          specialAttack:playerPokemon.specialAttack,
+          specialDefense:playerPokemon.specialDefense,
+  
+        },
+        enemy: {
+          hp:enemyPokemon.hp,
+          attack:enemyPokemon.attack,
+          defense:enemyPokemon.defense,
+          specialAttack:enemyPokemon.specialAttack,
+          specialDefense:enemyPokemon.specialDefense,
+
+        } 
+
+      },
+      player1Turn: true
+      
+
+    }
   ); 
 
-  useEffect(() => {
+const handleNextTurnClick = () =>  setGameState((prev) => {
+  const turnResult2 = doNextTurn();
+  console.log("turnResult",turnResult2);
+  return turnResult2;
+})
+  
 
-    setGameState(
-      {
+
+
+  function doNextTurn() {
+    
+    const { player } = {...gameState.players };
+    const { enemy } = {...gameState.players };
+    const player1Turn = gameState.player1Turn;
+
+
+    let damageBrutto, damageNetto;
+    let playerTurnIndex, enemyTurnIndex; 
+
+    playerTurnIndex = (gameState.player1Turn === true ? 0 : 1);
+    enemyTurnIndex = (gameState.player1Turn === true ? 1 : 0);
+    // console.log("playerTurnIndex", playerTurnIndex);
+    // console.log("enemyTurnIndex", enemyTurnIndex);
+
+    const player_hitter = (gameState.player1Turn === true ? player : enemy)
+    const player_ishit = (gameState.player1Turn === true ? enemy : player)
+    console.log("player_hitter", player_hitter);
+    console.log("player_ishit", player_ishit);
+
+    let gameOver = false;
+    
+    let hp = [Number(player_hitter.hp), Number(player_ishit.hp)];
+    let attack = [Number(player_hitter.attack), Number(player_ishit.attack)];
+    let defense = [Number(player_hitter.defense), Number(player_ishit.defense)];
+    let specialAttack = [Number(player_hitter.specialAttack), Number(player_ishit.specialAttack)];
+    let specialDefense = [Number(player_hitter.specialDefense), Number(player_ishit.specialDefense)];
+    
+    // [0] always hits [1]
+
+    if(hp[1] > 0) {
+      damageBrutto = (attack[0] ** 2) / (attack[0] + defense[1]);
+      // console.log("attack[0] ** 2",attack[0] ** 2)
+      // console.log("attack[0] + defense[1]",attack[0] + defense[1])
+      // console.log("damageBrutto",damageBrutto)
+      if (defense[1] > 0 ){
+        if (defense[1] >= damageBrutto) {
+          defense[1] = defense[1] - damageBrutto;
+          damageNetto = 0;
+        } else {
+          damageNetto = damageBrutto - defense[1]
+          defense[1] = 0
+          hp[1] = hp[1] - damageNetto
+        }
+      } else{
+
+        damageNetto = damageBrutto 
+      }
+      if (damageBrutto >= hp[1]) {
+        hp[1] = 0
+        gameOver = true;
+        console.log('winner is: winner is: winner is: winner is: winner is: winner is: winner is: winner is: winner is: ' )
+        console.log(player_hitter)
+      } else {
+        hp[1] = hp[1] - damageBrutto;
+      }
+
+      const newplayer1Turn = !player1Turn
+      const newGameState = {
         players: {
           player: {
-            hp:playerPokemon.hp,
-            attack:playerPokemon.attack,
-            defense:playerPokemon.defense,
-            specialAttack:playerPokemon.specialAttack,
-            specialDefense:playerPokemon.specialDefense,
-    
+            hp:hp[playerTurnIndex],
+            attack:attack[playerTurnIndex],
+            defense:defense[playerTurnIndex],
+            specialAttack:specialAttack[playerTurnIndex],
+            specialDefense:specialDefense[enemyTurnIndex],
+      
           },
           enemy: {
-            hp:enemyPokemon.hp,
-            attack:enemyPokemon.attack,
-            defense:enemyPokemon.defense,
-            specialAttack:enemyPokemon.specialAttack,
-            specialDefense:enemyPokemon.specialDefense,
-
-          } 
-
+            hp:hp[enemyTurnIndex],
+            attack:attack[enemyTurnIndex],
+            defense:defense[enemyTurnIndex],
+            specialAttack:specialAttack[enemyTurnIndex],
+            specialDefense:specialDefense[enemyTurnIndex],
+  
+          }
         },
-        player1Turn: true
         
+        player1Turn: newplayer1Turn
 
       }
-    );
-    console.log("setGameState")
 
-    // setFightIsRunning(true)
+      setCounter((prev) => {
+        const newValue = prev + 1;
+        return newValue;
+      });    
 
-  }, [])
+ 
+      return(newGameState)
+    }
+
+    return({...gameState})
+
+
+  }
+
+
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          setCounter((prev) => {
+            const newValue = prev - 1;
+            return newValue;
+          });
+        }}
+      >
+        -
+      </button>
+      <div>{counter}</div>
+      <button
+        onClick={handleNextTurnClick}
+      >
+        +
+      </button>
+    </>
+  );
+}
+
+export default Fightarena;
+
+
+
+
+
+
+
+  // useEffect(() => {
+
+  //   setGameState(
+  //     {
+  //       players: {
+  //         player: {
+  //           hp:playerPokemon.hp,
+  //           attack:playerPokemon.attack,
+  //           defense:playerPokemon.defense,
+  //           specialAttack:playerPokemon.specialAttack,
+  //           specialDefense:playerPokemon.specialDefense,
+    
+  //         },
+  //         enemy: {
+  //           hp:enemyPokemon.hp,
+  //           attack:enemyPokemon.attack,
+  //           defense:enemyPokemon.defense,
+  //           specialAttack:enemyPokemon.specialAttack,
+  //           specialDefense:enemyPokemon.specialDefense,
+
+  //         } 
+
+  //       },
+  //       player1Turn: true
+        
+
+  //     }
+  //   );
+  //   console.log("setGameState")
+
+  //   // setFightIsRunning(true)
+
+  // }, [])
 
   // useInterval(() => setCounter(counter + 1), 1000);
 
@@ -104,15 +264,13 @@ const Fightarena = (props) => {
   //   return turnResult2;
   // }), 5000);
 
+  // useCallback(() =>  setGameState((prev) => {
+  //   const turnResult2 = doNextTurn();
+  //   console.log("turnResult",turnResult2);
+  //   return turnResult2;
+  // }));
 
-const handleNextTurnClick = (e) => {
-  useCallback(() =>  setGameState((prev) => {
-    const turnResult2 = doNextTurn();
-    console.log("turnResult",turnResult2);
-    return turnResult2;
-  }));
-}
-  
+
   // useEffect(() => {
 
   //   // if(fightIsRunning === true) {
@@ -137,101 +295,17 @@ const handleNextTurnClick = (e) => {
   // }, [gameState]);
 
 
-  useEffect(() => {
-    if (turnResult){
-    console.log("turnResult",turnResult)
+  // useEffect(() => {
+  //   if (turnResult){
+  //   // console.log("turnResult",turnResult)
       
-      setGameState(turnResult);
+  //     setGameState(turnResult);
       
-    }
+  //   }
 
-  }, [currendTurn])
-
-
+  // }, [currendTurn])
 
 
-
-  function doNextTurn() {
-    
-    const { player } = {...gameState.players };
-    const { enemy } = {...gameState.players };
-    const player1Turn = gameState.player1Turn;
-
-    console.log("player", player);
-    console.log("enemy", enemy);
-
-    let damageBrutto, damageNetto;
-    let playerTurnIndex, enemyTurnIndex; 
-
-    playerTurnIndex = (gameState.player1Turn === true ? 0 : 1);
-    enemyTurnIndex = (gameState.player1Turn === true ? 1 : 0);
-    console.log("playerTurnIndex", playerTurnIndex);
-    console.log("enemyTurnIndex", enemyTurnIndex);
-
-    const player_hitter = (gameState.player1Turn === true ? player : enemy)
-    const player_ishit = (gameState.player1Turn === true ? enemy : player)
-
-    let gameOver = false;
-    
-    let hp = [player_hitter.hp, player_ishit.hp];
-    let attack = [player_hitter.attack, player_ishit.attack];
-    let defense = [player_hitter.defense, player_ishit.defense];
-    let specialAttack = [player_hitter.specialAttack, player_ishit.specialAttack];
-    let specialDefense = [player_hitter.specialDefense, player_ishit.specialDefense];
-
-    if(hp[enemyTurnIndex] > 0) {
-      damageBrutto = attack[playerTurnIndex] / defense[enemyTurnIndex] * attack[playerTurnIndex];
-      if (defense[enemyTurnIndex] > 0 ){
-        if (defense[enemyTurnIndex] >= damageBrutto) {
-          defense[enemyTurnIndex] = defense[enemyTurnIndex] - damageBrutto;
-          damageNetto = 0;
-        } else {
-          damageNetto = damageBrutto - defense[enemyTurnIndex]
-          defense[enemyTurnIndex] = 0
-          hp[playerTurnIndex] = hp[playerTurnIndex] - damageNetto
-        }
-      } else{
-        if (damageBrutto >= hp[enemyTurnIndex]) {
-          hp[enemyTurnIndex] = 0
-          gameOver = true;
-        } else {
-          hp[playerTurnIndex] = hp[playerTurnIndex] - damageBrutto;
-        }
-      }
-      const newGameState = {
-        players: {
-          player: {
-            hp:hp[playerTurnIndex],
-            attack:attack[playerTurnIndex],
-            defense:defense[enemyTurnIndex],
-            specialAttack:specialAttack[playerTurnIndex],
-            specialDefense:specialDefense[enemyTurnIndex],
-      
-          },
-          enemy: {
-            hp:hp[enemyTurnIndex],
-            attack:attack[enemyTurnIndex],
-            defense:defense[enemyTurnIndex],
-            specialAttack:specialAttack[enemyTurnIndex],
-            specialDefense:specialDefense[enemyTurnIndex],
-  
-          }
-        },
-        
-        player1Turn: !player1Turn
-
-      }
-
-
- 
-      return(newGameState)
-    
-    }
-
-    return({...gameState})
-
-
-  }
 
   // function fightLoop(playerPokemon, enemyPokemon) {
   //   let hpPlayer1 = playerPokemon.hp;
@@ -299,28 +373,3 @@ const handleNextTurnClick = (e) => {
 
 
 
-
-  return (
-    <>
-      <button
-        onClick={() => {
-          setCounter((prev) => {
-            const newValue = prev - 1;
-            console.log(newValue);
-            return newValue;
-          });
-        }}
-      >
-        -
-      </button>
-      <div>{counter}</div>
-      <button
-        onClick={handleNextTurnClick}
-      >
-        +
-      </button>
-    </>
-  );
-}
-
-export default Fightarena;

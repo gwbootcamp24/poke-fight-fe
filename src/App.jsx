@@ -33,7 +33,7 @@ useEffect(()=>{
 
   if (testpokemon1Data&&testpokemon2Data&&Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
     
-    console.log("was here navigate",game)
+    // console.log("was here navigate",game)
 
     navigate("./fightarena/");
   }
@@ -56,18 +56,18 @@ useEffect(()=>{
           if (!res.ok) throw new Error("Request failed");
           const data = await res.json();
   
-           console.log("data",data)
+          //  console.log("data",data)
                 
           return(data);
 
         } catch (error) {
-          console.log("error",url);
+          // console.log("error",url);
         }
       }
   
 
       if (Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
-        console.log("testpokemon1Data fetched")
+        // console.log("testpokemon1Data fetched")
       }
       return null;
     };
@@ -77,7 +77,7 @@ useEffect(()=>{
 },[]);
   
     const getPlayerstats = (pokemonData) => {
-      console.log("pokemonData" );
+      // console.log("pokemonData" );
       let playerStats = pokemonData.stats.split(/ /);
       let player = {...pokemonData, 
         hp:playerStats[0],
@@ -93,8 +93,8 @@ useEffect(()=>{
       if (testpokemon1Data&&testpokemon2Data&&Object.keys(testpokemon1Data).length > 0 && Object.keys(testpokemon2Data).length > 0) {
         let player1 = getPlayerstats(testpokemon1Data);
         let player2 = getPlayerstats(testpokemon2Data);
-        console.log("player1", player1); 
-        console.log("player2", player2);
+        // console.log("player1", player1); 
+        // console.log("player2", player2);
         setGame({playerPokemon: player1, enemyPokemon: player2})
       }
     },[testpokemon1Data]);
