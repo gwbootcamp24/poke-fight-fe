@@ -18,10 +18,6 @@ function App() {
   const [game, setGame] = useState({});
   const [testpokemon1Data, setTestpokemon1Data] = useState({});
   const [testpokemon2Data, setTestpokemon2Data] = useState({});
-  const testpokemon1 = 347;
-  const testpokemon2 = 57;
-  const apiUrl1 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${testpokemon1}`;
-  const apiUrl2 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${testpokemon2}`;
   let location = useLocation();
   let errortestpokemon1Data, errortestpokemon2Data
   // console.log(location );
@@ -41,8 +37,12 @@ useEffect(()=>{
 
 
 useEffect(()=>{
+  // location.state  //  {state: {playerPokemonId: selectedPokemon.id, enemyPokemonId: randomPokemon.id}}
+  if (location.pathname.match(/fightTest/) && location.state.playerPokemonId && location.state.enemyPokemonId){
+    const apiUrl1 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${location.state.playerPokemonId}`;
+    const apiUrl2 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${location.state.enemyPokemonId}`;
 
-  if (location.pathname.match(/fightTest/)){
+    console.log("location.state",location.state);
     const loader = async () => {
       const p1Data = await fetchDataWithoutHook(apiUrl1);
       const p2Data = await fetchDataWithoutHook(apiUrl2);
@@ -74,7 +74,7 @@ useEffect(()=>{
     loader();
   }
 
-},[]);
+},[location.pathname]);
   
     const getPlayerstats = (pokemonData) => {
       // console.log("pokemonData" );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch.js";
 import { useBackgroundImage } from "../context/BackgroundImageContext.jsx";
 import Button from "../ui/Button.jsx";
@@ -16,6 +16,7 @@ import Arena6 from '../background/arena_06.png';
 
 function Stareoff() {
 
+  const navigate = useNavigate();
   const { setBackgroundImage } = useBackgroundImage();
   const { id: selectedPokemonId } = useParams();
   const selectedPokemonUrl = `${import.meta.env.VITE_SERVER_URL}/pokemon/${selectedPokemonId}`;
@@ -57,7 +58,10 @@ function Stareoff() {
   if (!selectedPokemon || !randomPokemon) {
     return <div>Loading...</div>;
   }
-
+  const handleStartFightClick = (e) => {
+    e.preventDefault()
+    navigate('../fightTest', {state: {playerPokemonId: selectedPokemon.id, enemyPokemonId: randomPokemon.id}})
+  }
   return (
     <div className="stareoff-container">
       <div className="title">
@@ -71,8 +75,8 @@ function Stareoff() {
           alt={selectedPokemon.name}
           src={`${import.meta.env.VITE_SERVER_URL}/sprites/pokemon/other/official-artwork/${selectedPokemon.id}.png`}
       />
-      <div className="start-btn">
-      <Button img={Fight} url={`/fightarena/${selectedPokemonId}`}/>
+      <div onClick={handleStartFightClick} className="start-btn">
+      <Button img={Fight} />
       </div>
       <img className="opponent-img"
       alt={randomPokemon.name}
