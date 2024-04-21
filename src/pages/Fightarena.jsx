@@ -1,8 +1,55 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+
+
+
+
+
+
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
+
+
+const useCallback = (callback) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+  }, []);
+};
+
+
+
+
 const Fightarena = (props) => {
   const {playerPokemon, enemyPokemon} = props
   // const [fightIsRunning, setFightIsRunning] = useState(false)
   const [currendTurn, setCurrendTurn] = useState(1)
+  const [counter, setCounter] = useState(0);
   let turnResult
 
 
@@ -44,28 +91,50 @@ const Fightarena = (props) => {
 
   }, [])
 
+  // useInterval(() => setCounter(counter + 1), 1000);
+
+
   
+  // useInterval(() =>  setGameState((prev) => {
+  //   const turnResult2 = doNextTurn();
+  //   console.log("turnResult",turnResult2);
+  //   if (turnResult2.gameOver === true){
+  //     clearInterval(interval);
+  //   }
+  //   return turnResult2;
+  // }), 5000);
+
+
+const handleNextTurnClick = (e) => {
+  useCallback(() =>  setGameState((prev) => {
+    const turnResult2 = doNextTurn();
+    console.log("turnResult",turnResult2);
+    return turnResult2;
+  }));
+}
   
-  useEffect(() => {
+  // useEffect(() => {
 
-    // if(fightIsRunning === true) {
-      const interval = setInterval(() => {
+  //   // if(fightIsRunning === true) {
+  //     const interval = setInterval(() => {
 
-        turnResult = doNextTurn();
-        console.log("turnResult",turnResult);
-        setCurrendTurn(currendTurn+1)
+  //       turnResult = doNextTurn();
+  //       console.log("turnResult",turnResult);
+  //       setCurrendTurn(currendTurn+1)
 
-        if (turnResult.gameOver === true){
-          clearInterval(interval);
-        }
+  //       if (turnResult.gameOver === true){
+  //         clearInterval(interval);
+  //       }
 
-      }, 5000); 
+  //     }, 5000); 
 
-      console.log('hello loop')
-      return () => clearInterval(interval);
+
+
+  //     console.log('hello loop')
+  //     return () => clearInterval(interval);
       
-    // }
-  }, [gameState]);
+  //   // }
+  // }, [gameState]);
 
 
   useEffect(() => {
@@ -159,7 +228,7 @@ const Fightarena = (props) => {
     
     }
 
-    return(gameOver)
+    return({...gameState})
 
 
   }
@@ -232,10 +301,26 @@ const Fightarena = (props) => {
 
 
   return (
-    <div>
-      
-    </div>
-  )
+    <>
+      <button
+        onClick={() => {
+          setCounter((prev) => {
+            const newValue = prev - 1;
+            console.log(newValue);
+            return newValue;
+          });
+        }}
+      >
+        -
+      </button>
+      <div>{counter}</div>
+      <button
+        onClick={handleNextTurnClick}
+      >
+        +
+      </button>
+    </>
+  );
 }
 
 export default Fightarena;
