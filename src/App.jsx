@@ -18,8 +18,8 @@ function App() {
   const [game, setGame] = useState({});
   const [testpokemon1Data, setTestpokemon1Data] = useState({});
   const [testpokemon2Data, setTestpokemon2Data] = useState({});
-  const testpokemon1 = 3;
-  const testpokemon2 = 5;
+  const testpokemon1 = 347;
+  const testpokemon2 = 57;
   const apiUrl1 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${testpokemon1}`;
   const apiUrl2 = `${import.meta.env.VITE_SERVER_URL}/pokemon/${testpokemon2}`;
   let location = useLocation();

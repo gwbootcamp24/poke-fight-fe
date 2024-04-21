@@ -5,25 +5,6 @@ import { useEffect, useRef, useState } from "react";
 
 
 
-const useInterval = (callback, delay) => {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-};
 
 
 const useCallback = (callback) => {
@@ -80,14 +61,47 @@ const Fightarena = (props) => {
     }
   ); 
 
-const handleNextTurnClick = () =>  setGameState((prev) => {
-  const turnResult2 = doNextTurn();
-  console.log("turnResult",turnResult2);
-  return turnResult2;
-})
+  const handleNextTurnClick = () =>  setGameState((prev) => {
+    const turnResult2 = doNextTurn();
+    console.log("turnResult",turnResult2);
+    return turnResult2;
+  })
+    
+
+  const useInterval = (callback, delay) => {
+    const savedCallback = useRef();
+  
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        const id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  };
   
 
 
+  const handleStartFightClick = () =>  setGameState((prev) => {
+    const turnResult2 = doNextTurn();
+    console.log("turnResult",turnResult2);
+    if (turnResult2.gameOver === true){
+      clearInterval(interval);
+    }
+    return turnResult2;
+  })
+    
+  useInterval(handleStartFightClick, 5000);
+  
+    
 
   function doNextTurn() {
     
@@ -189,6 +203,11 @@ const handleNextTurnClick = () =>  setGameState((prev) => {
 
   return (
     <>
+      <button
+        onClick={handleStartFightClick}
+      >
+        Start
+      </button>
       <button
         onClick={() => {
           setCounter((prev) => {
