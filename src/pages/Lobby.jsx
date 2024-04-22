@@ -81,8 +81,9 @@ function Lobby() {
        </div>
 
         <div className="filterButtons">
-        <button onClick={handleFilter} value="all" style={{ background: "transparent"}}>
-          All
+        <button key="all" onClick={handleFilter} value="all" style={{ background: "transparent", border: "none", padding: "0", margin: "0" }}>
+          <img src={ButtonIcons["unknown"]} alt={ButtonIcons["unknown"]} style={{ display: "block", width: "40px", height: "40px", margin: "10px"}} />
+          <span style={{ display: "block", textAlign: "center", }}>All</span>
         </button>
         {pokeTypesState.map((type) => {
           const icons = ButtonIcons;

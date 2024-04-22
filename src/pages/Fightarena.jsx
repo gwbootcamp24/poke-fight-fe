@@ -1,6 +1,50 @@
 import { useEffect, useRef, useState } from "react";
 
 
+// const useInterval = (callback, delay) => {
+//   const savedCallback = useRef();
+
+//   // Remember the latest callback.
+//   useEffect(() => {
+//     savedCallback.current = callback;
+//   }, [callback]);
+
+//   // Set up the interval.
+//   useEffect(() => {
+//     function tick() {
+//       savedCallback.current();
+//     }
+//     if (delay !== null) {
+//       const id = setInterval(tick, delay);
+//       return () => clearInterval(id);
+//     }
+//   }, [delay]);
+// };
+
+
+
+
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    let endCon = false;
+    function tick() {
+      endCon = savedCallback.current();
+      console.log("endCon",endCon);
+    }
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
 
 
 
@@ -38,6 +82,8 @@ const Fightarena = (props) => {
     {
       players: {
         player: {
+          id: playerPokemon.id,
+          name: playerPokemon.name,
           hp:playerPokemon.hp,
           attack:playerPokemon.attack,
           defense:playerPokemon.defense,
@@ -46,6 +92,8 @@ const Fightarena = (props) => {
   
         },
         enemy: {
+          id: enemyPokemon.id,
+          name: enemyPokemon.name,
           hp:enemyPokemon.hp,
           attack:enemyPokemon.attack,
           defense:enemyPokemon.defense,
@@ -61,6 +109,9 @@ const Fightarena = (props) => {
     }
   ); 
 
+
+  console.log(props);
+
   const handleNextTurnClick = () =>  setGameState((prev) => {
     const turnResult2 = doNextTurn();
     console.log("turnResult",turnResult2);
@@ -68,38 +119,23 @@ const Fightarena = (props) => {
   })
     
 
-  const useInterval = (callback, delay) => {
-    const savedCallback = useRef();
-  
-    // Remember the latest callback.
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-  
-    // Set up the interval.
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        const id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-  };
-  
-
-
-  const handleStartFightClick = () =>  setGameState((prev) => {
-    const turnResult2 = doNextTurn();
-    console.log("turnResult",turnResult2);
-    if (turnResult2.gameOver === true){
-      clearInterval(interval);
+  const handleStartFightClick = () =>  {
+    let turnResult2;
+    setGameState((prev) => {
+      turnResult2 = doNextTurn();
+      console.log("turnResult",turnResult2);
+      return turnResult2;
+    })
+    if (turnResult2?.gameOver === true){
+      return true;
+    } else {
+      return false;
     }
-    return turnResult2;
-  })
+  
+  }
     
-  useInterval(handleStartFightClick, 5000);
+
+  useInterval(handleStartFightClick, 50000);
   
     
 
@@ -125,16 +161,18 @@ const Fightarena = (props) => {
 
     let gameOver = false;
     
+    let id = [Number(player_hitter.id), Number(player_ishit.id)];
+    let name = [player_hitter.name, player_ishit.name];
     let hp = [Number(player_hitter.hp), Number(player_ishit.hp)];
     let attack = [Number(player_hitter.attack), Number(player_ishit.attack)];
     let defense = [Number(player_hitter.defense), Number(player_ishit.defense)];
     let specialAttack = [Number(player_hitter.specialAttack), Number(player_ishit.specialAttack)];
     let specialDefense = [Number(player_hitter.specialDefense), Number(player_ishit.specialDefense)];
-    
+    const speedFactor = 0.3;
     // [0] always hits [1]
 
     if(hp[1] > 0) {
-      damageBrutto = (attack[0] ** 2) / (attack[0] + defense[1]);
+      damageBrutto = Math.round(speedFactor*(attack[0] ** 2) / (attack[0] + defense[1]));
       // console.log("attack[0] ** 2",attack[0] ** 2)
       // console.log("attack[0] + defense[1]",attack[0] + defense[1])
       // console.log("damageBrutto",damageBrutto)
@@ -164,6 +202,8 @@ const Fightarena = (props) => {
       const newGameState = {
         players: {
           player: {
+            id:id[playerTurnIndex],
+            name:name[playerTurnIndex],
             hp:hp[playerTurnIndex],
             attack:attack[playerTurnIndex],
             defense:defense[playerTurnIndex],
@@ -172,6 +212,8 @@ const Fightarena = (props) => {
       
           },
           enemy: {
+            id:id[enemyTurnIndex],
+            name:name[enemyTurnIndex],
             hp:hp[enemyTurnIndex],
             attack:attack[enemyTurnIndex],
             defense:defense[enemyTurnIndex],
@@ -184,7 +226,10 @@ const Fightarena = (props) => {
         player1Turn: newplayer1Turn
 
       }
-
+      if (gameOver){
+        newGameState.gameOver = true;
+        newGameState.winner = player_hitter;
+      }
       setCounter((prev) => {
         const newValue = prev + 1;
         return newValue;
@@ -224,6 +269,14 @@ const Fightarena = (props) => {
       >
         +
       </button>
+      {
+      gameState?.gameOver === true && 
+      <>
+        <h2>Winner: {(Object.keys(gameState.winner)?
+          Object.keys(gameState.winner).map(key => ` ${key}: ${gameState.winner[key]}`):'')}</h2> 
+      
+      </>
+      }
     </>
   );
 }
